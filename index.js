@@ -13,7 +13,7 @@ const ProductRouter =require("./routes/product.route")
 app.use("/product",ProductRouter)
 mongoose.connect(URI)
 .then(()=>{
-    console.log("mongodb iyaf connnect ooo")
+    console.log("mongodb iyaf connnect oooo")
 })
 .catch((err)=>{
     console.log(err,"mongodb no connect")
