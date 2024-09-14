@@ -17,8 +17,8 @@ const displayCreateProductPage = (req,res) => {
 const displayProducts = (req, res) => {
   ProductModel.find().then((allProducts) => {
     console.log(allProducts);
-    // res.send({allProducts})
-    res.render("displayproducts", { allProducts });
+    res.send({status:true,message:allProducts})
+    // res.render("displayproducts", { allProducts });
   });
 };
 const submitProduct = (req, res) => {
@@ -48,16 +48,19 @@ const submitProduct = (req, res) => {
       transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
           console.log(error);
+          res.send({status:false, message : error})
         } else {
           console.log("Email sent: " + info.response);
+          res.send({status:true, message : info.response})
         }
       });
-      res.redirect("/product/createproduct");
+      // res.redirect("/product/createproduct");
     })
     .catch((err) => {
       console.log(err, "it did not save ooo");
       message = "product could not be added, please try again";
-      res.redirect("/product/createproduct");
+      res.send({status:false,message:err})
+      // res.redirect("/product/createproduct");
     });
 };
 module.exports = {

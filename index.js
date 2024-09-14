@@ -1,12 +1,15 @@
 const express = require("express");
 const ejs = require("ejs");
 const mongoose = require("mongoose")
+const cors = require("cors")
 require("dotenv").config()
 const app = express();
 const ProductModel = require("./models/product.model")
 app.set("view engine","ejs")
 let PORT = 5001;
+app.use(cors())
 app.use(express.urlencoded({extended:true}))
+app.use(express.json())
 let URI = process.env.MONGO_DB_URI
 // Setup Mongodb connection
 const ProductRouter =require("./routes/product.route")
